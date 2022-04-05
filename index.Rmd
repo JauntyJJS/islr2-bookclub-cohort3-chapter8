@@ -97,13 +97,15 @@ have the least $RSS$ for all predictors
 $$RSS=\sum_{i:x_i{\in}R_1(k,s)}(y_i-\hat{y}_{R_1})^2 +  \sum_{i:x_i{\in}R_2(k,s)}(y_i-\hat{y}_{R_2})^2$$
 where $\hat{y}_{R_1}$ is the mean response for the training observations in $R_1(k,s)$, and $\hat{y}_{R_2}$ is the mean response for the training observations in $R_2(k,s)$.
 
-See https://bookdown.org/tpinto_home/Beyond-Additivity/regression-and-classification-trees.html for animation.
+Repeat the process until no region contains more than five observations.
 
-Repeat the process until no region contains more than five observations. However, this will results in an overfitting tree.
+See https://bookdown.org/tpinto_home/Beyond-Additivity/regression-and-classification-trees.html and https://www.youtube.com/watch?v=g9c66TUylZ4 for animation.
 
 ---
 
 # 8.1.1 Regression Trees
+
+However, the previous method may result in a tree that overfits the data.
 
 A better strategy is to 
 
@@ -237,13 +239,17 @@ knitr::include_graphics("img/figure_8_9.jpg")
 
 One problem with bagging is that each bagged tree may be highly similar to one another. 
 
-This happen if there is a strong predictor in the data set. Then in the collection of bagged trees, most or all of the trees will use this strong predictor in the top split, regardless of changes in the training set led by bootstrapping. This may cause the tree model to be less robust to changes in the data over time.
+This happens if there is a strong predictor in the data set. By the greedy principle, most of the bagged trees will use this strong predictor in the top split, regardless of changes in the training set led by bootstrapping. 
 
-To improve the robustness further, a change is made during the creation of a split in a given bagged tree on bootstrapped training samples. 
+This may cause the tree model to be less robust to changes in the data over time.
+
+To further improve the robustness of the model, a change is made during the creation of a split in a given bagged tree on bootstrapped training samples. 
 
 Instead of using the full set of $p$ predictors as split candidates, only a random sample of $m \approx \sqrt{p}$ predictors are used instead.
 
 This reduces the odds of the strong predictor being selected during the split and provide other predictors a chance.
+
+See https://www.youtube.com/watch?v=J4Wdy0Wc_xQ for animation.
 
 ---
 
@@ -257,3 +263,57 @@ knitr::include_graphics("img/figure_8_8.jpg")
 ---
 
 # 8.2.3 Boosting
+
+Recall in bagging, each tree is built on a bootstrap training data set. 
+
+On the other hand, in boosting, each tree is built on information that the previous trees are unable to catch. That is, we fit a tree using the current residuals, rather than the response.
+
+This is similar to the partial least square components in which each component is build based on the response's residual left by the model created from the previous partial least square components.
+
+The key is to make each tree small (with a few terminal nodes) but still "different" from one another.
+
+For simplicity, only boosting regression trees are described in the book.
+
+---
+
+# 8.2.3 Boosting
+
+.pull-left[
+Boosting has three tuning parameters.
+
+1. The number of trees $B$
+
+2. The maximum number of splits/depth $d$ each tree is allow to have. (to make each tree small)
+
+3. A shrinkage parameter or learning rate $\lambda$ (to make each tree "different" from one another)
+]
+
+.pull-right[
+```{r echo = FALSE, out.width="120%"}
+knitr::include_graphics("img/algorithm_8_2.jpg")
+```
+]
+
+See https://www.youtube.com/watch?v=3CC4N4z3GJc for animation.
+
+---
+
+# 8.2.3 Boosting
+
+```{r echo = FALSE, out.width="60%"}
+knitr::include_graphics("img/figure_8_11.jpg")
+```
+
+
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+For simplicity, only BART for regression are described in the book.
+
+- In bagging, each tree is built on a random set of training data.
+- In random forest, each tree also uses a random set of predictors.
+- In boosting, each tree is built to capture signal that is not yet accounted for by the current set of trees
+
+BART combines all these elements together.
+
