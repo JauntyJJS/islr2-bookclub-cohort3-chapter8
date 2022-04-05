@@ -1,0 +1,198 @@
+/* colour scheme */
+/* http://metrocolor.live */
+@import url('https://fonts.googleapis.com/css?family=Assistant:400,700');
+@import url('https://fonts.googleapis.com/css?family=Rosario');
+@import url('https://fonts.googleapis.com/css?family=Caveat');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap');
+
+
+body {
+  font-family: 'Assistant', sans-serif;
+  color: #1a2a3a;
+}
+
+h1, h2, h3 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/*-- LINKS/ANCHORS --*/
+a {
+  color:         #005EB8;
+  border-bottom: 2px solid #005EB8;
+  line-height:   1.5em;
+}
+
+a:hover {
+  border-bottom: 0px;
+}
+
+/*-- HEADINGS --*/
+
+.remark-slide-content h1 {
+  color:              #128922;
+  font-size:          45px;
+  line-height:        1em;
+}
+
+.remark-slide-content h2 {
+  font-size:          35px;
+  color:              #128922;
+  line-height:        1em;
+}
+
+.remark-slide-content h3 {
+  color:              #128922;
+  font-size:          25px;
+  line-height:        2em
+}
+
+/*-- PARAGRAPH TEXT --*/
+.remark-slide-content {
+  font-size:          23px;
+  line-height:        1.4em;  /*Specify the space between lines*/
+}
+
+/*-- HORIZONTAL BARS --*/
+hr {
+  content:            none;
+  display:            block;
+  border:             none;
+  background-color:   #231F20;
+  height:             0.08em;
+}
+
+/*-- BOTTOM-OF-SLIDE PROPERTIES --*/
+
+/*-- Footnote --*/
+.footnote {
+  position:           absolute;
+  bottom:             2em;
+  padding-right:      4em;
+  font-size:          80%;
+  line-height:        1.3em;
+}
+
+/*-- Slide number/Progress Bar --*/
+.remark-slide-number {
+  position: inherit;
+}
+
+.remark-slide-number .progress-bar-container {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  display: block;
+  left: 0;
+  right: 0;
+}
+
+.remark-slide-number .progress-bar {
+  height: 100%;
+  background-color: #ef342a;
+}
+
+/*-- CODE TEXT --*/
+
+/*-- In-line highlighting within text aka `Some Code` --*/
+.remark-code, .remark-inline-code {
+  font-family:        'Roboto Mono', monospace;
+  font-size:          90%;
+  font-weight:        400;
+  color:              #231F20;
+  background:         #E8EDEE;
+  border-radius:      3px;
+  padding:            1px 1px 1px 1px;
+}
+
+/*-- Line highlighting within code --*/
+.remark-code-line-highlighted {
+  background-color:   #E8EDEE;
+}
+
+/*-- CODE CHUNKS --*/
+
+/*-- Code chunk background layer --*/
+pre {
+  /*border: 2px solid rgba(204, 189, 204, 0.8); /* code chunk border*/
+  border:             none;
+  box-shadow:         2px 2px 2px 2px #eee;
+  padding:            0.1em;                    /* padding between code chunk and border */
+  background:         none !important;
+  overflow-x:         auto;                     /* enable horizontal scrolling with overflow */
+  border-radius:      1px;                      /* modify rounding of corners*/
+}
+
+/*--Code chunk code --*/
+pre code {
+  background:          none;
+  font-size:           18px !important;
+}
+
+/*-- TABLES --*/
+.remark-slide table {
+  margin:              auto;
+  border-top:          1px solid #768692;
+  border-bottom:       1px solid #768692;
+}
+
+/*-- Table header --*/
+.remark-slide table thead th {
+  border-bottom:       1px solid #768692;
+}
+
+/*-- Table rows (even) --*/
+.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) {
+  background:          #E8EDEE;
+}
+
+/*-- BLOCK QUOTE --*/
+blockquote {
+  border-left:         solid 5px #E8EDEE;
+  padding-left:        1em;
+}
+
+/*-- CUSTOM CLASS FOR THE TITLE SLIDE --*/
+
+.title-slide {
+  background-color: #128922;
+}
+
+/*-- Headings --*/
+.title-slide h1 {
+  font-family:     'Rosario', sans-serif;
+  font-size:       92px;
+  line-height:     1.2em;
+  color:           #f2f1f6;
+  text-align:      left !important;
+  vertical-align:  middle !important;
+  text-shadow:     0 0px 0px #000000;
+}
+
+.title-slide h3 {
+  font-family:     'Rosario', sans-serif;
+  font-size:       62px;
+  color:           #f2f1f6;
+  text-align:      right !important;
+  border-top:      5px solid #f2f1f6;
+  text-shadow:     0 0px 0px #000000;
+}
+
+/*-- Hides slide number from title slide --*/
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+
+/*-- CUSTOM CLASSES FOR TEXT EMPHASIS --*/
+.blue       { color:   #005EB8 }
+.green      { color:   #009639 }
+.pink       { color:   #AE2573 }
+.red        { color:   #DA291C }
+.warmyellow { color:   #FFB81C }
+
+/*-- Use for vertically long code chunk --*/
+.scrollable {
+  height: 80%;
+  overflow-y: auto; /* enable vertical scrolling with overflow */
+}
