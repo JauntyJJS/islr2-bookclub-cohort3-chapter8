@@ -108,6 +108,14 @@ meta() %>%
   )
 ```
 
+```{r xaringanExtra-share-again, echo=FALSE}
+# xaringanExtra::embed_xaringan(
+#  url = "https://jauntyjjs.github.io/islr2-bookclub-cohort3-chapter8",
+#  ratio = "16:9"
+# )
+xaringanExtra::use_share_again()
+```
+
 # Introduction
 
 This chapter introduces tree-based methods for regression and classification
