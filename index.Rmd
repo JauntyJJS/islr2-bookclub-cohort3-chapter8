@@ -25,6 +25,9 @@ output:
 ```{r initial, echo = FALSE, cache = FALSE, results = 'hide'}
 library(knitr)
 library(glue)
+library(metathis)
+library(webshot2)
+library(xaringanExtra)
 
 options(htmltools.dir.version = FALSE, tibble.width = 60, tibble.print_min = 6)
 opts_chunk$set(
@@ -42,6 +45,67 @@ opts_chunk$set(
   cache = TRUE
   #dev = 'svglite'
 )
+```
+
+```{r screenshot function, include=FALSE}
+#' Screenshot Your Title Slide for Share Image
+#'
+#' Takes a screenshot of your title slide for sharing on Twitter
+#' (and other social media sites).
+#'
+#' @param slides_rmd Your slides file
+#' @param path Path to new share image
+screenshot_share_image <- function(
+  slides_rmd,
+  path_image = "share-card.png"
+) {
+  if (!requireNamespace("webshot2", quietly = TRUE)) {
+    stop(
+      "`webshot2` is required: ", 
+      'remotes::install_github("rstudio/webshot2")'
+    )
+  }
+  
+  webshot2::rmdshot(
+    doc = slides_rmd,
+    file = path_image,
+    vheight = 600,
+    vwidth = 600 * 191 / 100,
+    rmd_args = list(
+      output_options = list(
+        nature = list(ratio = "191:100"),
+        self_contained = TRUE
+      )
+    )
+  )
+  
+  path_image
+}
+#screenshot_share_image("index.Rmd")
+```
+
+```{r metathis, echo=FALSE}
+meta() %>%
+  meta_name("github-repo" = "JauntyJJS/islr2-bookclub-cohort3-chapter8") %>% 
+  meta_social(
+    title = "Chapter 8: Tree-based Models",
+    description = glue::glue("
+    Presented at R for Data Science book club cohort 3 on \\
+    An Introduction to Statistical Learning: With \\
+    Applications in R Second Edition.
+    "),
+    url = "https://jauntyjjs.github.io/islr2-bookclub-cohort3-chapter8",
+    image = "https://raw.githubusercontent.com/JauntyJJS/islr2-bookclub-cohort3-chapter8/main/share-card.png",
+    image_alt = glue::glue("
+      Title slide of Chapter 8: Tree-based Models \\
+      of An Introduction to Statistical Learning: With \\
+      Applications in R Second Edition for R for Data Science book club cohort 3.
+      "),
+    og_type = "website",
+    og_author = "Jeremy Selva",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@JauntyJJS"
+  )
 ```
 
 # Introduction
