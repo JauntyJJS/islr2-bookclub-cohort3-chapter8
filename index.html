@@ -279,6 +279,113 @@ For simplicity, only BART for regression are described in the book.
 
 BART combines all these elements together.
 
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+
+The book define some notation
+
+- `\(K\)` be the total number of regression trees used to create the model (later by adding them together)
+- `\(B\)` be the number of iterations the BART algorithm will run to improve the additive regression trees.
+- `\(\hat{f}^b_k(x)\)` be the prediction of an observation `\(x\)` for the `\(k\)`th regression tree used in the `\(b\)`th iteration of the BART algorithm, where `\(1\le k \le K\)` and `\(1\le b \le B\)`
+- `\(L\)`, where `\(L&lt;B\)` be the number of burn-in iterations.
+
+Like boosting, the tree model is created by summing all regression trees at the end of each iteration.
+
+`$$\hat{f}^b(x) = \sum_{k=1}^{K}\hat{f}^b_k(x)$$`
+for `\(b=1,...,B\)`
+
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+In the first iteration of the BART algorithm, all `\(K\)` trees are initialized to
+tp predict only one value: `\(\hat{f}^1_k(x) = \frac{1}{nK}\sum_{i=1}^{n}y_i\)`
+, the mean of the response values divided by the total number of trees. Thus
+
+`$$\hat{f}^1(x) = \sum_{k=1}^K\hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^{n}y_i$$`
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+In subsequent `\(b\)` iteration, where `\(2\le b \le B\)`
+
+Given the `\(k\)`th tree, we calculate for each observation `\(i\)` where, `\(1\le i \le n\)`, a partial residual `\(r_i\)` is created by subtracting the response `\(y_i\)` with the predictions made from the other `\(K-1\)` trees denoted as `\((k')\)`. The other `\(K-1\)` trees include those that have already been updated by BART and those that will be updated by BART later.
+
+`$$r_i = y_i - \sum_{k'&lt;k}\hat{f}^b_{k'}(x_i) - \sum_{k'&gt;k}\hat{f}^{b-1}_{k'}(x_i)$$`
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+.pull-left[
+Next, BART will create possible changes/pertubations on the `\(k\)`th tree and assign a probability calculated by Bayesian methods (given the current `\(k\)`th tree terminal nodes or `\(\hat{f}^{b-1}_{k}(x)\)`).
+
+- Adding branches 
+- Pruning branches
+- Change the prediction on terminal nodes
+- Remain as they are
+
+Changes that greatly improve the fit to the partial residual will be given a higher probability. However, penalty scores will be given when adding new branches to prevent the tree from growing too deep. 
+
+Recall that unlike boosting, we do no have control on the depth.
+]
+
+.pull-right[
+&lt;img src="img/figure_8_12.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+BART will then "roll a dice" to choose a perturbation on the `\(k\)`th tree as `\(\hat{f}^{b}_{k}(x)\)`. High probability does not mean it will get chosen.
+
+The selected tree `\(\hat{f}^{b}_{k}(x)\)` will then we used to fit the partial residual `\(r_i\)`
+
+This same process will be done for all `\(K\)` trees. 
+
+Adding up all the regression tree will giving the new tree model as `\(\hat{f}^b(x) = \sum_{k=1}^{K}\hat{f}^b_k(x)\)` for the `\(b\)`th iteration.
+
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+Figures from https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6800811/
+
+&lt;img src="img/paper1.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+Figures from https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6800811/
+
+.pull-left[
+&lt;img src="img/paper2.jpg" width="80%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+&lt;img src="img/paper3.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+]
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+In total there will be a total of `\(B\)` tree models
+
+`$$\hat{f}^1(x), ..., \hat{f}^B(x)$$`
+However, the first few models usually gives a poor prediction. Hence it is better to get rid of the first few `\(L\)` models. 
+
+To obtain a single prediction, the final tree model involves taking the average predicted value of the remaining `\(B-L\)` tree models.
+
+`$$\hat{f}(x) = \frac{1}{B-L}\sum_{b=L+1}^{B}\hat{f}^b(x)$$`
+
+---
+
+# 8.2.4 Bayesian Additive Regression Trees (BART)
+
+&lt;img src="img/algorithm_8_3.jpg" width="60%" style="display: block; margin: auto;" /&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
