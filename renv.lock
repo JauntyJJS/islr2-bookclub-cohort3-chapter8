@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.1.3",
+    "Version": "4.2.0",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -68,15 +68,15 @@
     },
     "chromote": {
       "Package": "chromote",
-      "Version": "0.0.0.9003",
+      "Version": "0.1.0",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "chromote",
       "RemoteUsername": "rstudio",
       "RemoteRef": "HEAD",
-      "RemoteSha": "865e24e2270afab07e587909499c4e06f03bbedf",
-      "Hash": "551f93685a12d17d43e06ebfcccc813a",
+      "RemoteSha": "edaefdf2b05fcfa6c04226d587d309b8c6160953",
+      "Hash": "a068a88a7909f4021ba7cdc827da6200",
       "Requirements": [
         "R6",
         "curl",
@@ -202,10 +202,10 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.38",
+      "Version": "1.39",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "10b3dc3c6acb925910edda5d0543b3a2",
+      "Hash": "029ab7c4badd3cf8af69016b2ba27493",
       "Requirements": [
         "evaluate",
         "highr",
@@ -281,10 +281,10 @@
     },
     "ps": {
       "Package": "ps",
-      "Version": "1.6.0",
+      "Version": "1.7.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "32620e2001c1dce1af49c49dccbb9420",
+      "Hash": "eef74b13f32cae6bb0d495e53317c44c",
       "Requirements": []
     },
     "purrr": {
@@ -308,10 +308,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.15.1",
+      "Version": "0.15.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c38694b67e7f7091f7d073b3766258cc",
+      "Hash": "c1078316e1d4f70275fc1ea60c0bc431",
       "Requirements": []
     },
     "rlang": {
@@ -324,10 +324,10 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.13",
+      "Version": "2.14",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "ac78f4d2e0289d4cba73b88af567b8b1",
+      "Hash": "31b60a882fabfabf6785b8599ffeb8ba",
       "Requirements": [
         "bslib",
         "evaluate",
@@ -400,10 +400,10 @@
     },
     "uuid": {
       "Package": "uuid",
-      "Version": "1.0-4",
+      "Version": "1.1-0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "99c959c7424be995ddca19b5736c8dd0",
+      "Hash": "f1cb46c157d080b729159d407be83496",
       "Requirements": []
     },
     "webshot2": {
@@ -441,10 +441,10 @@
     },
     "xaringan": {
       "Package": "xaringan",
-      "Version": "0.23",
+      "Version": "0.24",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "7e0872f2e8cd94bac8e9c2eb2e6a8e59",
+      "Hash": "714cfbdbc0775404c8df7894dfed0165",
       "Requirements": [
         "htmltools",
         "knitr",

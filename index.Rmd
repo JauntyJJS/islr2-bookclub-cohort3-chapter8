@@ -131,10 +131,10 @@ This chapter introduces tree-based methods for regression and classification
 # 8.1.1 Regression Trees
 
 1. Divide the predictor space — that is, the set of possible values
-for $X_1,X_2, . . . ,X_p$ — into $J$ distinct and .red[**non-overlapping**] regions,
+for $X_1,X_2, . . . ,X_p$ — into $J$ distinct and .blue[**non-overlapping**] regions,
 $R_1,R_2, . . . ,R_J$ .
 
-2. For every observation that falls into the region $R_j$, where $1 \le j\le J$, take the .red[**mean**] of the response values for the training observations in $R_j$.
+2. For every observation that falls into the region $R_j$, where $1 \le j\le J$, take the .blue[**mean**] of the response values for the training observations in $R_j$.
 
 ```{r echo = FALSE, out.width="60%"}
 knitr::include_graphics("img/figure_8_2.jpg")
@@ -144,12 +144,12 @@ knitr::include_graphics("img/figure_8_2.jpg")
 
 # 8.1.1 Regression Trees
 
-The goal is to find boxes $R_1, . . . ,R_J$ that minimize the $RSS$, given by
+The goal is to find boxes $R_1, . . . ,R_J$ that.blue[**minimize**] the $RSS$, given by
 
 
 $$\mathrm{RSS}=\sum_{j=1}^{J}\sum_{i{\in}R_j}^{}(y_i - \hat{y}_{R_j})^2$$
 
-where $\hat{y}_{R_j}$ is the mean response for the training observations within the $j$th box.
+where $\hat{y}_{R_j}$ is the .blue[**mean**] response for the training observations within the $j$th box.
 
 Unfortunately, it is .red[**computationally infeasible**] to consider every
 possible partition of the feature space into $J$ boxes.
@@ -158,18 +158,18 @@ possible partition of the feature space into $J$ boxes.
 
 # 8.1.1 Regression Trees
 
-One way is given all predictors $X_1,X_2, . . . ,X_p$, find the best cut off point $s$ for a given predictor $X_k$, where $1 \le k\le p$ such that the resulting two regions
+One way is given all predictors $X_1,X_2, . . . ,X_p$, find the .blue[**best**] cut off point $s$ for a given predictor $X_k$, where $1 \le k\le p$ such that the resulting two regions
 
 .center[
 $R_1(k,s)=\left\{X|X_k<s\right\}$ and $R_2(k,s)=\left\{X|X_k{\ge}s\right\}$
 ]
 
-have the least $RSS$ for all predictors
+have the .blue[**least**] $RSS$ for all predictors
 
 $$RSS=\sum_{i:x_i{\in}R_1(k,s)}(y_i-\hat{y}_{R_1})^2 +  \sum_{i:x_i{\in}R_2(k,s)}(y_i-\hat{y}_{R_2})^2$$
-where $\hat{y}_{R_1}$ is the mean response for the training observations in $R_1(k,s)$, and $\hat{y}_{R_2}$ is the mean response for the training observations in $R_2(k,s)$.
+where $\hat{y}_{R_1}$ is the .blue[**mean**] response for the training observations in $R_1(k,s)$, and $\hat{y}_{R_2}$ is the .blue[**mean**] response for the training observations in $R_2(k,s)$.
 
-Repeat the process until no region contains more than five observations.
+.blue[**Repeat**] the process until no region contains more than five observations.
 
 See https://bookdown.org/tpinto_home/Beyond-Additivity/regression-and-classification-trees.html and https://www.youtube.com/watch?v=g9c66TUylZ4 for animation.
 
@@ -177,18 +177,18 @@ See https://bookdown.org/tpinto_home/Beyond-Additivity/regression-and-classifica
 
 # 8.1.1 Regression Trees
 
-However, the previous method may result in a tree that overfits the data.
+However, the previous method may result in a tree that .red[**overfits**] the data.
 
 A better strategy is to 
 
 1. grow a very large tree $T_0$ as before 
-2. tune $\alpha$ in the cost complexity pruning formula to prune/penalise $T_0$ to give a sequence of sub trees. 
-3. apply cross validation or validation set on those sub trees and pick $\alpha$ that gives the best sub tree (smallest $RSS$).
+2. tune $\alpha$ in the cost complexity pruning formula to prune/penalise $T_0$ to give .blue[**a sequence**] of sub trees $T$s. 
+3. apply cross validation or validation set on those sub trees $T$s and pick $\alpha$ that gives the .blue[**best sub tree**] (smallest $RSS$).
 
 The cost complexity pruning formula is 
 
 $$\sum_{m=1}^{|T|}\sum_{x_i{\in}R_m}(y_i-\hat{y}_{R_m})^2 + \alpha|T|$$
-where $\alpha\ge0$, $|T|$ is the number of terminal nodes the sub tree $T$ holds. $R_m$ is the box/region corresponding to the $m$th terminal node and $y_i-\hat{y}_{R_m}$ is the mean response for the traning observation in $R_m$
+where $\alpha\ge0$, $|T|$ is the number of .blue[**terminal nodes**] the sub tree $T$ holds. $R_m$ is the .blue[**box/region**] corresponding to the $m$th terminal node and $y_i-\hat{y}_{R_m}$ is the .blue[**mean**] response for the training observation in $R_m$
 
 ---
 
@@ -198,6 +198,8 @@ $$\sum_{m=1}^{|T|}\sum_{x_i{\in}R_m}(y_i-\hat{y}_{R_m})^2 + \alpha|T|$$
 
 When $\alpha = 0$, the sub tree $=T_0$ as the cost complexity pruning formula equals to the $RSS$.
 
+The cost complexity .red[**penalises**] complex trees with a lot of terminal nodes.
+
 Similar to lasso, as $\alpha$ increase, some terminal nodes will not be used.
 
 See https://www.youtube.com/watch?v=D0efHEJsfHo for animation.
@@ -206,31 +208,35 @@ See https://www.youtube.com/watch?v=D0efHEJsfHo for animation.
 
 # 8.1.2 Classification Trees
 
-In the case of classification, instead of taking the mean of a given region, we take the most commonly occurring class (or mode) of training observations in the region to which it belongs.
+In the case of classification, instead of taking the mean of a given region, we take the .blue[**most commonly occurring class**] (or mode) of training observations in the region to which it belongs.
 
 For the measurement of error, instead of $RSS$, one way is to use the fraction of the training observations in that region that do not belong to the most common class.
 
 $$E = 1 - \max_k(\hat{p}_{mk})$$
-where $\hat{p}_{mk}$ the proportion of training observations in the $m$th region that are from the $k$th class. Hence, $0\le\hat{p}_{mk}\le1$
+where $\hat{p}_{mk}$ the .blue[**proportion of training observations**] in the $m$th region that are from the $k$th class. Hence, $0\le\hat{p}_{mk}\le1$
 
-However, this error rate is unsuited for tree-based classification.
+However, this error rate is unsuited for tree-based classification because $E$ does not change much as the tree grows (.red[**lack sensitivity**]).
+
+Instead, .green[**more sensitive**] classification error measurements like the Gini index or the entropy are used.
 
 ---
 
 # 8.1.2 Classification Trees
 
-Instead, the Gini index or the entropy. Both are very similar measures, where small values indicate that the node contains large number of observations from a single class.
+The Gini index and the entropy are very similar measures, where .green[**small values**] indicate that the node contains .blue[**large number of observations from a single class**].
 
 The Gini index is defined by
 
 $$G = \sum_{k=1}^{K}\hat{p}_{mk}(1-\hat{p}_{mk})$$
+The value varies between $0$ and $1$,
+where, $0$ denotes that .blue[**all**] observations belong to a certain class, $1$ denotes that the observations are .blue[**randomly**] distributed across various classes and
+$0.5$ denotes .blue[**equally**] distributed observations into some classes.
+
 The entropy is defined by
 
 $$D = - \sum_{k=1}^{K}\hat{p}_{mk}\log(\hat{p}_{mk})$$
 
-Both Gini index and Entropy are small when all of the $\hat{p}_{mk}$'s are close to zero or one.
-
-When building the classification tree, these classification error measurements can be used to evaluate the sub trees.
+Both Gini index and Entropy are .blue[**small**] when all of the $\hat{p}_{mk}$'s are close to .blue[**zero**] or .blue[**one**].
 
 ---
 
@@ -256,9 +262,9 @@ knitr::include_graphics("img/figure_8_7.jpg")
 
 # 8.1.3 Trees Versus Linear Models
 
-Compared to linear models, decision trees are easier to explain to others because they mirror human decision-making. They can be displayed graphically and easily interpreted by non-experts.
+Compared to linear models, decision trees are .green[**easier to explain**] to others because they mirror human decision-making. They can be displayed graphically and easily interpreted by non-experts.
 
-However, it is less robust than the linear models. A small change in the data set can cause a large change to the decision tree. This may hurt the decision trees performance in prediction.
+However, it is .red[**less robust**] than the linear models. A small change in the data set can cause a large change to the decision tree. This may hurt the decision trees performance in prediction.
 
 To improve its performance, methods like bagging, random forests, and boosting are used (sometimes at the cost of interpretability). 
 
@@ -268,11 +274,11 @@ To improve its performance, methods like bagging, random forests, and boosting a
 
 Bagging is an approach that tries to “stabilise”(make it more robust to change of data) the predictions from trees
 
-The idea is to generate $B$ different bootstrapped training datasets to create $B$ different regression trees $\hat{f}^{*b}$ respectively for $1\le b \le B$. Given a new observation to predict called $x$, we use the $B$ regression trees to create $B$ predictions. The final prediction value is calculated by averaging all the predictions.
+The idea is to generate $B$ different .blue[**bootstrapped training datasets**] to create $B$ different regression trees $\hat{f}^{*b}$ respectively for $1\le b \le B$. Given a new observation to predict called $x$, we use the $B$ regression trees to create $B$ predictions. The final prediction value is calculated by .blue[**averaging**] all the predictions.
 
 $$\hat{f}_{bag}(x) = \frac{1}{B}\sum_{b=1}^B\hat{f}^{*b}(x)$$
 
-In the case of classification, we record the class predicted by each of the $B$ trees, and take a majority vote.
+In the case of classification, we record the class predicted by each of the $B$ trees, and take a .blue[**majority**] vote.
 
 What is missing is how do we estimate the test error rate (without using the test data) to pick the best $B$ value or number of bagged trees ?
 
@@ -280,11 +286,11 @@ What is missing is how do we estimate the test error rate (without using the tes
 
 # 8.2.1 Bagging
 
-Each bagged tree is trained using two-thirds of the training data. The other one-third of the training data, known as out-of-bag or $OOB$ observations are then used.
+Each bagged tree is trained using .blue[**two-thirds**] of the training data. The other one-third of the training data, known as .blue[**out-of-bag**] or $OOB$ observations are then used.
 
-Given an $OOB$ observation, we first predict its response using only bagged trees that do not use this $OOB$ observation in its training. An $OOB$ prediction is made by averaging the predicted response (regression) or a majority vote (classification) among these specific bagged trees. 
+Given an $OOB$ observation, we first predict its response .blue[**using only bagged trees**] that do not use this $OOB$ observation in its training. An $OOB$ prediction is made by averaging the predicted response (regression) or a majority vote (classification) among these specific bagged trees. 
 
-As each $OOB$ observation has an $OOB$ prediction and a true response, the $OOB$ error can be computed via the overall $OOB$ $RSS$ (regression) or classification error like Gini index. The $B$ value that gives the least $OOB$ error will be taken.
+As each $OOB$ observation has an $OOB$ prediction and a true response, the $OOB$ error can be computed via the overall $OOB$ $RSS$ (regression) or classification error like Gini index. The $B$ value that gives the .blue[**least**] $OOB$ error will be taken.
 
 ---
 
@@ -295,7 +301,7 @@ Bagging usually improves prediction accuracy at the expense of interpretability.
 
 It is no longer clear which predictors are more important as we now have more than one tree (which may gives differing views on the importance of a given predictor).
 
-An overall summary of the importance of each predictor can be achieved by recording how much the average $RSS$ or Gini index improves (or decreases) when each tree is splitted over a given predictor.
+An overall summary of the importance of each predictor can be achieved by recording how much the average $RSS$ or Gini index .blue[**improves (or decreases)**] when each tree is splitted over a given predictor.
 ]
 
 .pull-right[
@@ -309,15 +315,15 @@ knitr::include_graphics("img/figure_8_9.jpg")
 
 # 8.2.2 Random Forests
 
-One problem with bagging is that each bagged tree may be highly similar to one another. 
+One problem with bagging is that each bagged tree may be .red[**highly similar**] to one another. 
 
-This happens if there is a strong predictor in the data set. By the greedy principle, most of the bagged trees will use this strong predictor in the top split, regardless of changes in the training set led by bootstrapping. 
+This happens if there is a strong predictor in the data set. By the greedy principle, most of the bagged trees will .red[**use this strong predictor**] in the top split, regardless of changes in the training set led by bootstrapping. 
 
-This may cause the tree model to be less robust to changes in the data over time.
+This may cause the tree model to be .red[**less robust**] to changes in the data over time.
 
-To further improve the robustness of the model, a change is made during the creation of a split in a given bagged tree on bootstrapped training samples. 
+To further improve the robustness of the model, a .blue[**change**] is made during the creation of a split in a given bagged tree on bootstrapped training samples. 
 
-Instead of using the full set of $p$ predictors as split candidates, only a random sample of $m \approx \sqrt{p}$ predictors are used instead.
+Instead of using the full set of $p$ predictors as split candidates, only .blue[**a random sample**] of $m \approx \sqrt{p}$ predictors are used instead.
 
 This reduces the odds of the strong predictor being selected during the split and provide other predictors a chance.
 
@@ -338,11 +344,11 @@ knitr::include_graphics("img/figure_8_8.jpg")
 
 Recall in bagging, each tree is built on a bootstrap training data set. 
 
-On the other hand, in boosting, each tree is built on information that the previous trees are unable to catch. That is, we fit a tree using the current residuals, rather than the response.
+On the other hand, in boosting, each tree is built on information that the previous trees are unable to catch. That is, we fit a tree using .blue[**the current residuals**], rather than the response.
 
 This is similar to the partial least square components in which each component is build based on the response's residual left by the model created from the previous partial least square components.
 
-The key is to make each tree small (with a few terminal nodes) but still "different" from one another.
+The key is to make each tree .blue[**small**] (with a few terminal nodes) but still "different" from one another.
 
 For simplicity, only boosting regression trees are described in the book.
 
@@ -353,11 +359,11 @@ For simplicity, only boosting regression trees are described in the book.
 .pull-left[
 Boosting has three tuning parameters.
 
-1. The number of trees $B$
+1. The .blue[**number of trees**] $B$
 
-2. The maximum number of splits/depth $d$ each tree is allow to have. (to make each tree small)
+2. The maximum number of .blue[**splits/depth**] $d$ each tree is allow to have. (to make each tree small)
 
-3. A shrinkage parameter or learning rate $\lambda$ (to make each tree "different" from one another)
+3. A .blue[**shrinkage parameter or learning rate**] $\lambda$ (to make each tree "different" from one another)
 ]
 
 .pull-right[
@@ -383,9 +389,9 @@ knitr::include_graphics("img/figure_8_11.jpg")
 
 For simplicity, only BART for regression are described in the book.
 
-- In bagging, each tree is built on a random set of training data.
-- In random forest, each tree also uses a random set of predictors.
-- In boosting, each tree is built to capture signal that is not yet accounted for by the current set of trees
+- In bagging, each tree is built on a .blue[**random set of training data**].
+- In random forest, each tree also uses .blue[**a random set of predictors**].
+- In boosting, each tree is built to capture .blue[**signal that is not yet accounted**] for by the current set of trees
 
 BART combines all these elements together.
 
@@ -396,10 +402,10 @@ BART combines all these elements together.
 
 The book define some notation
 
-- $K$ be the total number of regression trees used to create the model (later by adding them together)
-- $B$ be the number of iterations the BART algorithm will run to improve the additive regression trees.
-- $\hat{f}^b_k(x)$ be the prediction of an observation $x$ for the $k$th regression tree used in the $b$th iteration of the BART algorithm, where $1\le k \le K$ and $1\le b \le B$
-- $L$, where $L<B$ be the number of burn-in iterations.
+- $K$ be the total .blue[**number of regression trees**] used to create the model (later by adding them together)
+- $B$ be the .blue[**number of iterations**] the BART algorithm will run to improve the additive regression trees.
+- $\hat{f}^b_k(x)$ be the .blue[**prediction**] of an observation $x$ for the $k$th regression tree used in the $b$th iteration of the BART algorithm, where $1\le k \le K$ and $1\le b \le B$
+- $L$, where $L<B$ be the number of .blue[**burn-in**] iterations.
 
 Like boosting, the tree model is created by summing all regression trees at the end of each iteration.
 
@@ -411,8 +417,8 @@ for $b=1,...,B$
 # 8.2.4 Bayesian Additive Regression Trees (BART)
 
 In the first iteration of the BART algorithm, all $K$ trees are initialized to
-tp predict only one value: $\hat{f}^1_k(x) = \frac{1}{nK}\sum_{i=1}^{n}y_i$
-, the mean of the response values divided by the total number of trees. Thus
+t0 predict only .blue[**one**] value: $\hat{f}^1_k(x) = \frac{1}{nK}\sum_{i=1}^{n}y_i$
+, the .blue[**mean**] of the response values divided by the total number of trees. Thus
 
 $$\hat{f}^1(x) = \sum_{k=1}^K\hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^{n}y_i$$
 ---
@@ -421,7 +427,9 @@ $$\hat{f}^1(x) = \sum_{k=1}^K\hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^{n}y_i$$
 
 In subsequent $b$ iteration, where $2\le b \le B$
 
-Given the $k$th tree, we calculate for each observation $i$ where, $1\le i \le n$, a partial residual $r_i$ is created by subtracting the response $y_i$ with the predictions made from the other $K-1$ trees denoted as $(k')$. The other $K-1$ trees include those that have already been updated by BART and those that will be updated by BART later.
+Given the $k$th tree, we calculate for each observation $i$ where, $1\le i \le n$, a .blue[**partial residual**] $r_i$ is created by subtracting the response $y_i$ with the predictions made from the .blue[**other**] $K-1$ trees denoted as $(k')$. 
+
+The other $K-1$ trees include those that have already been updated by BART and those that will be updated by BART later.
 
 $$r_i = y_i - \sum_{k'<k}\hat{f}^b_{k'}(x_i) - \sum_{k'>k}\hat{f}^{b-1}_{k'}(x_i)$$
 ---
@@ -429,16 +437,14 @@ $$r_i = y_i - \sum_{k'<k}\hat{f}^b_{k'}(x_i) - \sum_{k'>k}\hat{f}^{b-1}_{k'}(x_i
 # 8.2.4 Bayesian Additive Regression Trees (BART)
 
 .pull-left[
-Next, BART will create possible changes/pertubations on the $k$th tree and assign a probability calculated by Bayesian methods (given the current $k$th tree terminal nodes or $\hat{f}^{b-1}_{k}(x)$).
+Next, BART will create .blue[**possible changes/pertubations**] on the $k$th tree and assign a .blue[**probability**] calculated by Bayesian methods (given the current $k$th tree terminal nodes or $\hat{f}^{b-1}_{k}(x)$ and partial residual $r_i$).
 
 - Adding branches 
 - Pruning branches
 - Change the prediction on terminal nodes
 - Remain as they are
 
-Changes that greatly improve the fit to the partial residual will be given a higher probability. However, penalty scores will be given when adding new branches to prevent the tree from growing too deep. 
-
-Recall that unlike boosting, we do no have control on the depth.
+Changes that greatly improve the fit to the partial residual will be given a .blue[**higher probability**]. However, penalty scores will be given when adding new branches to prevent the tree from growing too deep. Recall that unlike boosting, we do no have control on the depth
 ]
 
 .pull-right[
@@ -451,9 +457,9 @@ knitr::include_graphics("img/figure_8_12.jpg")
 
 # 8.2.4 Bayesian Additive Regression Trees (BART)
 
-BART will then "roll a dice" to choose a perturbation on the $k$th tree as $\hat{f}^{b}_{k}(x)$. High probability does not mean it will get chosen.
+BART will then "roll a dice" to .blue[**choose**] a perturbation on the $k$th tree as $\hat{f}^{b}_{k}(x)$. High probability does not mean it will get chosen.
 
-The selected tree $\hat{f}^{b}_{k}(x)$ will then we used to fit the partial residual $r_i$
+The .blue[**selected**] tree $\hat{f}^{b}_{k}(x)$ will then we used to .blue[**fit**] the partial residual $r_i$
 
 This same process will be done for all $K$ trees. 
 
@@ -493,9 +499,9 @@ knitr::include_graphics("img/paper3.jpg")
 In total there will be a total of $B$ tree models
 
 $$\hat{f}^1(x), ..., \hat{f}^B(x)$$
-However, the first few models usually gives a poor prediction. Hence it is better to get rid of the first few $L$ models. 
+However, the first few models usually gives a poor prediction. Hence it is better to .blue[**get rid**] of the first few $L$ models. 
 
-To obtain a single prediction, the final tree model involves taking the average predicted value of the remaining $B-L$ tree models.
+To obtain a single prediction, the final tree model involves taking the .blue[**average**] predicted value of the .blue[**remaining**] $B-L$ tree models.
 
 $$\hat{f}(x) = \frac{1}{B-L}\sum_{b=L+1}^{B}\hat{f}^b(x)$$
 
