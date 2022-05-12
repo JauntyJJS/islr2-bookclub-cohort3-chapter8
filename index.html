@@ -105,7 +105,22 @@ where `\(\hat{y}_{R_1}\)` is the .blue[**mean**] response for the training obser
 
 .blue[**Repeat**] the process until no region contains more than five observations.
 
-See https://bookdown.org/tpinto_home/Beyond-Additivity/regression-and-classification-trees.html and https://www.youtube.com/watch?v=g9c66TUylZ4 for animation.
+---
+
+# 8.1.1 Regression Trees
+
+See https://bookdown.org/tpinto_home/Beyond-Additivity/regression-and-classification-trees.html for animation.
+
+.center[![DecisionTree](DecisionTree.gif)]
+
+---
+
+# 8.1.1 Regression Trees
+
+See [StatQuest with Josh Starmer](https://www.youtube.com/watch?v=g9c66TUylZ4) 22 min animation.
+
+.center[
+&lt;iframe width="853" height="480" src="https://www.youtube.com/embed/g9c66TUylZ4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;]
 
 ---
 
@@ -136,7 +151,14 @@ The cost complexity .red[**penalises**] complex trees with a lot of terminal nod
 
 Similar to lasso, as `\(\alpha\)` increase, some terminal nodes will not be used.
 
-See https://www.youtube.com/watch?v=D0efHEJsfHo for animation.
+---
+
+# 8.1.1 Regression Trees
+
+See [StatQuest with Josh Starmer](https://www.youtube.com/watch?v=D0efHEJsfHo) 16 min animation.
+
+.center[
+&lt;iframe width="853" height="480" src="https://www.youtube.com/embed/D0efHEJsfHo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;]
 
 ---
 
@@ -255,7 +277,14 @@ Instead of using the full set of `\(p\)` predictors as split candidates, only .b
 
 This reduces the odds of the strong predictor being selected during the split and provide other predictors a chance.
 
-See https://www.youtube.com/watch?v=J4Wdy0Wc_xQ for animation.
+---
+
+# 8.2.2 Random Forests
+
+See [StatQuest with Josh Starmer](https://www.youtube.com/watch?v=J4Wdy0Wc_xQ) 10 min animation.
+
+.center[
+&lt;iframe width="853" height="480" src="https://www.youtube.com/embed/J4Wdy0Wc_xQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;]
 
 ---
 
@@ -296,7 +325,14 @@ Boosting has three tuning parameters.
 &lt;img src="img/algorithm_8_2.jpg" width="120%" style="display: block; margin: auto;" /&gt;
 ]
 
-See https://www.youtube.com/watch?v=3CC4N4z3GJc for animation.
+---
+
+# 8.2.3 Boosting
+
+See [StatQuest with Josh Starmer](https://www.youtube.com/watch?v=3CC4N4z3GJc) 16 min animation.
+
+.center[
+&lt;iframe width="853" height="480" src="https://www.youtube.com/embed/3CC4N4z3GJc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;]
 
 ---
 
@@ -339,10 +375,12 @@ for `\(b=1,...,B\)`
 # 8.2.4 Bayesian Additive Regression Trees (BART)
 
 In the first iteration of the BART algorithm, all `\(K\)` trees are initialized to
-t0 predict only .blue[**one**] value: `\(\hat{f}^1_k(x) = \frac{1}{nK}\sum_{i=1}^{n}y_i\)`
-, the .blue[**mean**] of the response values divided by the total number of trees. Thus
+to predict only .blue[**one**] value: `\(\hat{f}^1_k(x) = \frac{1}{nK}\sum_{i=1}^{n}y_i\)`
+, the .blue[**mean**] of the response values divided by the total number of trees. 
 
-`$$\hat{f}^1(x) = \sum_{k=1}^K\hat{f}^1_k(x) = \frac{1}{n}\sum_{i=1}^{n}y_i$$`
+Thus
+
+`$$\hat{f}^1(x) = \sum_{k=1}^K\hat{f}^1_k(x) = \sum_{k=1}^K\frac{1}{nK}\sum_{i=1}^{n}y_i = \frac{1}{n}\sum_{i=1}^{n}y_i$$`
 ---
 
 # 8.2.4 Bayesian Additive Regression Trees (BART)
@@ -351,7 +389,7 @@ In subsequent `\(b\)` iteration, where `\(2\le b \le B\)`
 
 Given the `\(k\)`th tree, we calculate for each observation `\(i\)` where, `\(1\le i \le n\)`, a .blue[**partial residual**] `\(r_i\)` is created by subtracting the response `\(y_i\)` with the predictions made from the .blue[**other**] `\(K-1\)` trees denoted as `\((k')\)`. 
 
-The other `\(K-1\)` trees include those that have already been updated by BART and those that will be updated by BART later.
+The other `\(K-1\)` trees include those that have already been updated by BART `\((k'&lt;k)\)` and those that will be updated by BART later `\((k'&gt;k)\)`.
 
 `$$r_i = y_i - \sum_{k'&lt;k}\hat{f}^b_{k'}(x_i) - \sum_{k'&gt;k}\hat{f}^{b-1}_{k'}(x_i)$$`
 ---
