@@ -144,7 +144,7 @@ knitr::include_graphics("img/figure_8_2.jpg")
 
 # 8.1.1 Regression Trees
 
-The goal is to find boxes $R_1, . . . ,R_J$ that.blue[**minimize**] the $RSS$, given by
+The goal is to find boxes $R_1, . . . ,R_J$ that .blue[**minimize**] the $RSS$, given by
 
 
 $$\mathrm{RSS}=\sum_{j=1}^{J}\sum_{i{\in}R_j}^{}(y_i - \hat{y}_{R_j})^2$$
